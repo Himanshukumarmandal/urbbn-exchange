@@ -35,7 +35,7 @@ Designed with a clean, minimal, and trustworthy dark fintech UI.
    ```bash
    node server.js
    ```
-   *The backend will run on `http://localhost:5000`.*
+   *The backend will run on `import.meta.env.VITE_API_URL`.*
 
 ### 2. Start the Frontend Dev Server
 

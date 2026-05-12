@@ -1,8 +1,8 @@
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'import.meta.env.VITE_API_URL/api';
 
 export const api = async (endpoint, options = {}) => {
   const token = localStorage.getItem('userToken');
-  
+
   const headers = {
     'Content-Type': 'application/json',
     ...options.headers,
