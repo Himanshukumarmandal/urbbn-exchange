@@ -15,11 +15,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/conversion-app';
+const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(MONGODB_URI, { retryWrites: false })
+if (!MONGO_URI) {
+  console.error('FATAL ERROR: MONGO_URI is not defined in environment variables.');
+  process.exit(1);
+}
+
+mongoose.connect(MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+  .catch((err) => {
+    console.error('MongoDB connection error:', err.message);
+    process.exit(1);
+  });
 
 app.use('/api/auth', authRoutes);
 app.use('/api/deposit', depositRoutes);
